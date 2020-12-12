@@ -1,0 +1,12 @@
+{
+  "name": "promiseallobjectvalues",
+  "version": "1.0.0",
+  "description": "This package provides a function similar to Promise.all, only instead of an array, it accepts an object containing promises as values.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Roy Hadad",
+  "license": "MIT"
+}
