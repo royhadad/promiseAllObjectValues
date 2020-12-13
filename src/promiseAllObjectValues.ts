@@ -10,14 +10,16 @@ type Unpacked<T> = T extends (infer U)[]
             ? U
             : T;
 
-type ReturnType<T> = {
+type ResultsDictionary<T> = {
     [P in keyof T]: Unpacked<T[P]>
 };
 
-const promiseAllObjectValues = <T extends GenericObject<Promise<unknown>>>(
+type PromisesDictionary = GenericObject<Promise<unknown>>
+
+const promiseAllObjectValues = <T extends PromisesDictionary>(
     promisesDictionary: T
-): Promise<ReturnType<T>> => {
-    const { keys, promises } = Object.entries(promisesDictionary).reduce<{
+): Promise<ResultsDictionary<T>> => {
+    const {keys, promises} = Object.entries(promisesDictionary).reduce<{
         keys: (keyof T)[];
         promises: Promise<unknown>[];
     }>(
@@ -26,13 +28,14 @@ const promiseAllObjectValues = <T extends GenericObject<Promise<unknown>>>(
             acc.promises.push(promise);
             return acc;
         },
-        { keys: [], promises: [] }
+        {keys: [], promises: []}
     );
 
-    return Promise.all(promises).then((res) => {
+    return Promise.all(promises).then((res: Unpacked<T[keyof T]>[]) => {
         return keys.reduce((acc, key, index) => {
-            return { ...acc, [key]: res[index] };
-        }, {}) as ReturnType<T>;
+            acc[key] = res[index]
+            return acc;
+        }, {} as ResultsDictionary<T>);
     });
 };
 
