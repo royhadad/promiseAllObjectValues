@@ -8,7 +8,8 @@ const promiseAllObjectValues = (promisesDictionary) => {
     }, { keys: [], promises: [] });
     return Promise.all(promises).then((res) => {
         return keys.reduce((acc, key, index) => {
-            return Object.assign(Object.assign({}, acc), { [key]: res[index] });
+            acc[key] = res[index];
+            return acc;
         }, {});
     });
 };
