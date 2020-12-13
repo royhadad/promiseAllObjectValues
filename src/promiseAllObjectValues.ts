@@ -1,4 +1,6 @@
-type GenericObject<T> = { [key: string]: T };
+type GenericObject<T> = {
+    [key: string]: T
+};
 
 type Unpacked<T> = T extends (infer U)[]
     ? U
@@ -8,7 +10,9 @@ type Unpacked<T> = T extends (infer U)[]
             ? U
             : T;
 
-type ReturnType<T> = { [P in keyof T]: Unpacked<T[P]> };
+type ReturnType<T> = {
+    [P in keyof T]: Unpacked<T[P]>
+};
 
 const promiseAllObjectValues = <T extends GenericObject<Promise<unknown>>>(
     promisesDictionary: T
