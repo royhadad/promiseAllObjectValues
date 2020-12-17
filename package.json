@@ -12,5 +12,15 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/royhadad/promiseAllObjectValues"
-  }
+  },
+  "keywords": [
+    "object",
+    "promise",
+    "values",
+    "properties",
+    "promiseAll",
+    "objectValues",
+    "promiseAllObjectValues",
+    "promiseAllProperties"
+  ]
 }
